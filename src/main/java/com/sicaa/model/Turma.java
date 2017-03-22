@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Tb_Turmas")
+@Table(name = "Tb_Turma")
 public class Turma  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -21,7 +21,6 @@ public class Turma  implements Serializable {
 	
 	@Column
 	private String codigo;
-	
 
 	@Column
 	private Integer id_disciplina;

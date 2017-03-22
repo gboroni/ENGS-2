@@ -10,23 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Tb_Disciplina")
-public class Disciplina  implements Serializable {
+@Table(name = "Tb_Aluno")
+public class Aluno  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-		
+	
 	@Column
 	private String nome;
 	
-	
+	@Column
+	private String matricula;
+
 	public long getId() {
 		return id;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -39,4 +41,12 @@ public class Disciplina  implements Serializable {
 		this.nome = nome;
 	}
 
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+	
 }

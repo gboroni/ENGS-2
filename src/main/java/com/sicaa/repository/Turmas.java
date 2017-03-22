@@ -11,7 +11,7 @@ import com.sicaa.model.Turma;
 public interface Turmas extends JpaRepository<Turma, Long> {
 	
 	@Modifying
-	@Query(value="select t.id as id, t.codigo as codigo, d.id as id_disciplina, d.nome as nome_disciplina from tb_turmas t inner join tb_disciplinas d on t.id_disciplina = d.id", nativeQuery=true)
+	@Query(value="select t.id as id, t.codigo as codigo, d.id as id_disciplina, d.nome as nome_disciplina from tb_turma t inner join tb_disciplina d on t.id_disciplina = d.id", nativeQuery=true)
 	List<Turma> findAllTurmas();
 	
 }
