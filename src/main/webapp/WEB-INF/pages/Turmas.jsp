@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
@@ -19,12 +20,11 @@
 			th:object="${turma}" th:action="@{/turmas}">
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Código"
-					th:field="*{codigo}" /> 
-					
-					<select th:field="*{id_disciplina}">
-					<option th:each="i : ${disciplinas}" th:value="${i.id}"
-						th:text="${i.nome}"></option>
-					</select>
+					th:field="*{codigo}" />
+				<form:select path="country">
+					<form:options items="${countryList}" />
+				</form:select>
+
 				<button type="submit" class="btn btn-primary">Adicionar</button>
 			</div>
 		</form>
@@ -33,14 +33,12 @@
 				<tr>
 					<th>Id</th>
 					<th>Código</th>
-					<th>Disciplina</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="turma : ${turmas}">
 					<td th:text="${turma.id}"></td>
 					<td th:text="${turma.codigo}"></td>
-					<td th:text="${turma.nome_disciplina}"></td>
 				</tr>
 			</tbody>
 		</table>
