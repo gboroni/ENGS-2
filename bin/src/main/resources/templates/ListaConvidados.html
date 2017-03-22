@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+
+
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width"/>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+		<title>Lista de Convidados</title>
+	</head>
+	
+	<body>
+		
+		<div class="panel panel-default" style="margin: 10px">
+			<div class="panel-heading">
+				<h1  class="panel-title">Lista de convidados</h1>
+			</div>
+		</div>
+		
+		<div class="panel-body">
+			
+			<form class="form-inline" method="POST" style="margin: 20px 0" th:object="${convidado}" th:action="@{/convidados}">
+				
+				<div class="form-group">
+
+					<input type="text" class="form-control" placeholder="nome" th:field="*{nome}"/>
+					<input type="text" class="form-control" placeholder="Acompanhantes" th:field="*{quantidadeAcompanhantes}"/>
+					<input type="text" class="form-control" placeholder="Id" th:field="*{id}"/>
+					<button type="submit" class="btn btn-primary">Adicionar</button>
+				</div>
+	
+			</form>
+			
+			<table class="table">
+				
+				<thead>
+					<tr>
+						<th>
+							Nome
+						</th>
+						<th>
+							Acompanhantes
+						</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="convidado : ${convidados}">
+						<td th:text="${convidado.nome}"></td>
+						<td th:text="${convidado.quantidadeAcompanhantes}"></td>
+
+					</tr>
+				</tbody>
+				
+			</table>
+		</div>
+		
+	</body>
+
+</html>
