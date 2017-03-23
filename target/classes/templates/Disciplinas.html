@@ -15,37 +15,37 @@
 <title>Lista de Disciplinas</title>
 </head>
 <body>
-<section layout:fragment="conteudo">
-	<div class="panel panel-default" style="margin: 10px">
-		<div class="panel-heading">
-			<h1 class="panel-title">Lista de Disciplinas</h1>
-		</div>
-	</div>
-	<div class="panel-body">
-		<form class="form-inline" method="POST" style="margin: 20px 0"
-			th:object="${disciplina}" th:action="@{/disciplinas}">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Nome"
-					th:field="*{nome}" />
-				<button type="submit" class="btn btn-primary">Adicionar</button>
+	<section layout:fragment="conteudo">
+		<div class="panel panel-default" style="margin: 10px">
+			<div class="panel-heading">
+				<h1 class="panel-title">Lista de Disciplinas</h1>
 			</div>
-		</form>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Nome</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="disciplina : ${disciplinas}">
-					<td th:text="${disciplina.id}"></td>
-					<td th:text="${disciplina.nome}"></td>
-				</tr>
-			</tbody>
+		</div>
+		<div class="panel-body">
+			<form class="form-inline" method="POST" style="margin: 20px 0"
+				th:object="${disciplina}" th:action="@{/disciplinas}">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Nome"
+						th:field="*{nome}" />
+					<button type="submit" class="btn btn-primary">Adicionar</button>
+				</div>
+			</form>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nome</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="disciplina : ${disciplinas}">
+						<td th:text="${disciplina.id}"></td>
+						<td th:text="${disciplina.nome}"></td>
+					</tr>
+				</tbody>
 
-		</table>
-	</div>
+			</table>
+		</div>
 	</section>
 </body>
 </html>

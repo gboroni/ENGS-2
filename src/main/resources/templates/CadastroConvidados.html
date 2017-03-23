@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout-padrao}">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<!-- 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/> -->
+<!-- 		<link rel="stylesheet" type="text/css" href="/css/style.css"/> -->
+
+
+<title>Cadastro de Convidados</title>
+</head>
+<body>
+	<section layout:fragment="conteudo">
+		<div>
+			<form class="form-horizontal" method="POST" style="margin: 20px 0"
+				th:object="${convidado}" th:action="@{/convidados}">
+
+				<div class="panel panel-default">
+					<!-- 				<div class="form-group"> -->
+
+					<div class="panel-heading">
+						<div class="clearfix">
+							<h1 class="panel-title aw-titulo-panel">Novo Convidado</h1>
+							<a class="btn btn-link aw-link-panel" href="/convidados">Voltar
+								para pesquisa</a>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="nome" class="col-sm-1 control-label">Nome</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" placeholder="nome"
+								th:field="*{nome}" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="Acompanhantes" class="col-sm-1 control-label">Acompanhantes</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" placeholder="Acompanhantes"
+						th:field="*{quantidadeAcompanhantes}" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="Id" class="col-sm-1 control-label">Id</label>
+						<div class="col-sm-4">
+							 <input type="text"
+						class="form-control" placeholder="Id" th:field="*{id}" />
+						</div>
+					</div>
+
+
+					
+					<button type="submit" class="btn btn-primary">Adicionar</button>
+				</div>
+
+			</form>
+		</div>
+
+	</section>
+
+</body>
+</html>

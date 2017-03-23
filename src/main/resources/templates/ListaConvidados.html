@@ -15,48 +15,57 @@
 
 <body>
 	<section layout:fragment="conteudo">
-		<div class="panel panel-default" style="margin: 10px">
+		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h1 class="panel-title">Lista de convidados</h1>
-			</div>
-		</div>
-
-		<div class="panel-body">
-
-			<form class="form-inline" method="POST" style="margin: 20px 0"
-				th:object="${convidado}" th:action="@{/convidados}">
-
-				<div class="form-group">
-
-					<input type="text" class="form-control" placeholder="nome"
-						th:field="*{nome}" /> <input type="text" class="form-control"
-						placeholder="Acompanhantes" th:field="*{quantidadeAcompanhantes}" />
-					<input type="text" class="form-control" placeholder="Id"
-						th:field="*{id}" />
-					<button type="submit" class="btn btn-primary">Adicionar</button>
+				<div class="clearfix">
+					<h1 class="panel-title">Listar de Convidados</h1>
+					<a class="btn btn-link aw-link-panel" href="/convidados/novo">Novo
+						título</a>
 				</div>
+			</div>
 
-			</form>
+			<div class="panel-body">
 
-			<table class="table">
+				<!-- 			<form class="form-inline" method="POST" style="margin: 20px 0" -->
+				<!-- 				th:object="${convidado}" th:action="@{/convidados}"> -->
 
-				<thead>
-					<tr>
-						<th>Nome</th>
-						<th>Acompanhantes</th>
-					</tr>
-				</thead>
+				<!-- 				<div class="form-group"> -->
 
-				<tbody>
-					<tr th:each="convidado : ${convidados}">
-						<td th:text="${convidado.nome}"></td>
-						<td th:text="${convidado.quantidadeAcompanhantes}"></td>
+				<!-- 					<input type="text" class="form-control" placeholder="nome" -->
+				<!-- 						th:field="*{nome}" /> <input type="text" class="form-control" -->
+				<!-- 						placeholder="Acompanhantes" th:field="*{quantidadeAcompanhantes}" /> -->
+				<!-- 					<input type="text" class="form-control" placeholder="Id" -->
+				<!-- 						th:field="*{id}" /> -->
+				<!-- 					<button type="submit" class="btn btn-primary">Adicionar</button> -->
+				<!-- 				</div> -->
 
-					</tr>
-				</tbody>
+				<!-- 			</form> -->
 
-			</table>
-		</div>
+
+
+				<table class="table table-bordered table-striped">
+
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Acompanhantes</th>
+							<th class="col-md-1"></th>
+
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="convidado : ${convidados}">
+							<td th:text="${convidado.nome}"></td>
+							<td th:text="${convidado.quantidadeAcompanhantes}"></td>
+							<td class="text-center"><a class="btn btn-link btn-xs">
+									<span class="glyphicon glyphicon-pencil"></span>
+							</a></td>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
 	</section>
 </body>
 
