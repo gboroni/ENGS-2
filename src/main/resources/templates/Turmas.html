@@ -1,108 +1,57 @@
 <!DOCTYPE html>
-<html lang="pt"
-	xmlns="http://www.w3.org/1999/xhtml" 
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	layout:decorate="~{layout/layout-padrao}">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
-	<meta charset="UTF-8"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	
-<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/css/style.css" />
-<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/algaworks.min.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/application.css}"/>
-	
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
 <title>Lista de Turmas</title>
+
 </head>
 <body>
-<div class="aw-layout-page">
-<nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
-	  <div class="container-fluid">
-
-	    <div class="navbar-header">
-	      <a class="navbar-brand  hidden-xs" href="#">
-	        <img alt="AlgaWorks" th:src="@{/layout/images/logo.png}"/>
-	      </a>
-
-	      <ul class="nav  navbar-nav">
-	        <li>
-	          <a href="#" class="js-sidebar-toggle"><i class="fa  fa-bars"></i></a>
-	        </li>
-	      </ul>
-	    </div>
-
-	    <ul class="nav navbar-nav  navbar-right">
-	    	<li>
-<!-- 	    		<p class="navbar-text" th:text="${#authentication.name}"></p> -->
-<p class="navbar-text" th:text="Edmo_F"></p>
-	    	</li>
-	      	<li>
-	        	<a th:href="@{/logout}"><em class="fa  fa-sign-out"></em></a>
-	      	</li> 
-	    </ul>
-
-	  </div>
-	</nav>
+	<section layout:fragment="conteudo">
 
 
-	<div class="panel panel-default" style="margin: 10px">
-		<div class="panel-heading">
-			<h1 class="panel-title">Lista de turmas</h1>
-		</div>
-	</div>
-	<div class="panel-body">
-		<form class="form-inline" method="POST" style="margin: 20px 0"
-			th:object="${turma}" th:action="@{/turmas}">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Código"
-					th:field="*{codigo}" /> 
-					
-					<select th:field="*{id_disciplina}">
-					<option th:each="i : ${disciplinas}" th:value="${i.id}"
-						th:text="${i.nome}"></option>
-					</select>
-				<button type="submit" class="btn btn-primary">Adicionar</button>
+		<div class="panel panel-default" style="margin: 10px">
+			<div class="panel-heading">
+				<h1 class="panel-title">Lista de turmas</h1>
 			</div>
-		</form>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Código</th>
-					<th>Disciplina</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="turma : ${turmas}">
-					<td th:text="${turma.id}"></td>
-					<td th:text="${turma.codigo}"></td>
-					<td th:text="${turma.nome_disciplina}"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	
-	<footer class="aw-layout-footer  js-content">
-		<div class="container-fluid">
-			<span class="aw-footer-disclaimer">&copy; 2016 AlgaWorks. Todos os direitos reservados.</span>
 		</div>
-	</footer>
-	</div>
-	
-	<script th:src="@{/layout/javascripts/vendors.min.js}"></script>
-<script th:src="@{/layout/javascripts/algaworks.min.js}"></script>
-
-<script th:src="@{/javascripts/vendors/jquery.masknumber.min.js}"></script>
-<script>
-	$('.js-moeda').maskNumber({
-		decimal: ',',
-		thousands: '.'
-	});
-</script>
+		<div class="panel-body">
+			<form class="form-inline" method="POST" style="margin: 20px 0"
+				th:object="${turma}" th:action="@{/turmas}">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Código"
+						th:field="*{codigo}" /> <select th:field="*{id_disciplina}">
+						<option th:each="i : ${disciplinas}" th:value="${i.id}"
+							th:text="${i.nome}"></option>
+					</select>
+					<button type="submit" class="btn btn-primary">Adicionar</button>
+				</div>
+			</form>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Código</th>
+						<th>Disciplina</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="turma : ${turmas}">
+						<td th:text="${turma.id}"></td>
+						<td th:text="${turma.codigo}"></td>
+						<td th:text="${turma.nome_disciplina}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
 </body>
 </html>
