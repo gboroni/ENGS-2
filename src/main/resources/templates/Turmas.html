@@ -1,14 +1,55 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="pt"
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
+	<meta charset="UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/algaworks.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/application.css}"/>
+	
 <title>Lista de Turmas</title>
 </head>
 <body>
+<div class="aw-layout-page">
+<nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
+	  <div class="container-fluid">
+
+	    <div class="navbar-header">
+	      <a class="navbar-brand  hidden-xs" href="#">
+	        <img alt="AlgaWorks" th:src="@{/layout/images/logo.png}"/>
+	      </a>
+
+	      <ul class="nav  navbar-nav">
+	        <li>
+	          <a href="#" class="js-sidebar-toggle"><i class="fa  fa-bars"></i></a>
+	        </li>
+	      </ul>
+	    </div>
+
+	    <ul class="nav navbar-nav  navbar-right">
+	    	<li>
+<!-- 	    		<p class="navbar-text" th:text="${#authentication.name}"></p> -->
+<p class="navbar-text" th:text="Edmo_F"></p>
+	    	</li>
+	      	<li>
+	        	<a th:href="@{/logout}"><em class="fa  fa-sign-out"></em></a>
+	      	</li> 
+	    </ul>
+
+	  </div>
+	</nav>
+
+
 	<div class="panel panel-default" style="margin: 10px">
 		<div class="panel-heading">
 			<h1 class="panel-title">Lista de turmas</h1>
@@ -45,5 +86,23 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<footer class="aw-layout-footer  js-content">
+		<div class="container-fluid">
+			<span class="aw-footer-disclaimer">&copy; 2016 AlgaWorks. Todos os direitos reservados.</span>
+		</div>
+	</footer>
+	</div>
+	
+	<script th:src="@{/layout/javascripts/vendors.min.js}"></script>
+<script th:src="@{/layout/javascripts/algaworks.min.js}"></script>
+
+<script th:src="@{/javascripts/vendors/jquery.masknumber.min.js}"></script>
+<script>
+	$('.js-moeda').maskNumber({
+		decimal: ',',
+		thousands: '.'
+	});
+</script>
 </body>
 </html>
