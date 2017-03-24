@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.sicaa.repository.Convidados;
 import com.sicaa.model.Convidado;
 import java.util.Arrays;
@@ -49,6 +51,16 @@ public class ConvidadosController {
 		ModelAndView mv = new ModelAndView("CadastroConvidados");
 		mv.addObject(convidado);
 		return mv;
+	}
+	
+	
+	
+	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
+	public String excluir(@PathVariable Long id) {
+		convidados.delete(id);
+		
+		//attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
+		return "redirect:/convidados";
 	}
 	
 	

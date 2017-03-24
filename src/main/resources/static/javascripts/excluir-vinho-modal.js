@@ -1,6 +1,6 @@
 $('#confirmaExclusaoModal').on('show.bs.modal', function (event) {
 	var botao = $(event.relatedTarget);
-	var nome = botao.data('nome');
+	var nome = botao.data('id');
 	var url = botao.data('url-apagar');
 	
 	var modal = $(this);

@@ -60,27 +60,53 @@
 							<td th:text="${convidado.nome}"></td>
 							<td th:text="${convidado.quantidadeAcompanhantes}"></td>
 							<td th:text="${convidado.id}"></td>
-							<td class="text-center">
-							<a class="btn btn-link btn-xs"
-								th:href="@{/convidados/{id}(id=${convidado.id})}">
-								 <span
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/convidados/{id}(id=${convidado.id})}"> <span
 									class="glyphicon glyphicon-pencil"></span>
-							</a> 
-							<a class="btn btn-link btn-xs" data-toggle="modal"
-								data-target="#confirmacaoExclusaoModal"> 
-								<span
-									class="glyphicon glyphicon-remove"></span>
+							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+								data-target="#confirmaExclusaoModal" 
+								
+								>
+									<span class="glyphicon glyphicon-remove"></span>
 							</a></td>
 
 						</tr>
 					</tbody>
 
 				</table>
-
+				<!-- 				<div layout:include="DialogoConfirmacaoExclusao"></div> -->
 			</div>
-			<div layout:include="DialogoConfirmacaoExclusao"></div>
+
+			<div class="modal  fade" id="confirmaExclusaoModal" tabindex="-1"
+				role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<form th:action="@{/convidados/1}" method="POST">
+							<input type="hidden" name="_method" value="DELETE" />
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Excluir vinho</h4>
+							</div>
+							<div class="modal-body">
+								<span>Tem certeza?</span>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn  btn-default"
+									data-dismiss="modal">Cancelar</button>
+								<button type="submit" class="btn  btn-primary">Excluir</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 	</section>
-	
+	<th:block layout:fragment="javascript-extra">
+		<script th:src="@{/javascripts/excluir-vinho-modal.js}"></script>
+	</th:block>
+
 </body>
 
 </html>
