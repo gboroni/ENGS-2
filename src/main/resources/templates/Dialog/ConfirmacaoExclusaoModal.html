@@ -1,27 +1,18 @@
-<!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/layout-padrao}">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width" />
-<title>Insert title here</title>
-</head>
-<body>
+
 	<div class="modal fade" id="confirmacaoExclusaoModal" tabindex="-1"
 		data-keyboard="false" data-backdrop="static">
 		<div class="modal-dialog">
 			<form action="/convidados" method="POST">
 				<input type="hidden" name="_method" value="DELETE" />
+				
 
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">Você tem certeza?</h4>
+						<h4 class="modal-title">Alerta</h4>
 					</div>
 
 					<div class="modal-body">
-						<span>Tem certeza que deseja apagar o título?</span>
+						<span>Tem certeza que deseja excluir?</span>
 					</div>
 
 					<div class="modal-footer">
@@ -32,6 +23,3 @@
 			</form>
 		</div>
 	</div>
-	
-</body>
-</html>
