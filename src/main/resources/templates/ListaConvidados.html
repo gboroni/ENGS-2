@@ -20,7 +20,7 @@
 				<div class="clearfix">
 					<h1 class="panel-title">Listar de Convidados</h1>
 					<a class="btn btn-link aw-link-panel" href="/convidados/novo">Novo
-						título</a>
+						Convidado</a>
 				</div>
 			</div>
 
@@ -49,6 +49,7 @@
 						<tr>
 							<th>Nome</th>
 							<th>Acompanhantes</th>
+							<th>id</th>
 							<th class="col-md-1"></th>
 
 						</tr>
@@ -58,15 +59,28 @@
 						<tr th:each="convidado : ${convidados}">
 							<td th:text="${convidado.nome}"></td>
 							<td th:text="${convidado.quantidadeAcompanhantes}"></td>
-							<td class="text-center"><a class="btn btn-link btn-xs">
-									<span class="glyphicon glyphicon-pencil"></span>
+							<td th:text="${convidado.id}"></td>
+							<td class="text-center">
+							<a class="btn btn-link btn-xs"
+								th:href="@{/convidados/{id}(id=${convidado.id})}">
+								 <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a> 
+							<a class="btn btn-link btn-xs" data-toggle="modal"
+								data-target="#confirmacaoExclusaoModal"> 
+								<span
+									class="glyphicon glyphicon-remove"></span>
 							</a></td>
+
 						</tr>
 					</tbody>
 
 				</table>
+
 			</div>
+			<div layout:include="DialogoConfirmacaoExclusao"></div>
 	</section>
+	
 </body>
 
 </html>
