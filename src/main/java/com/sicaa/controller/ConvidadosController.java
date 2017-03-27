@@ -8,11 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-
-import com.sicaa.repository.Convidados;
 
 import com.sicaa.model.Convidado;
 import com.sicaa.repository.Convidados;
@@ -60,7 +57,15 @@ public class ConvidadosController {
 	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
 	public String excluir(@PathVariable Long id) {
 		convidados.delete(id);
-		
+		//attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
+		return "redirect:/convidados";
+	}
+	
+	@RequestMapping(params={"id","action"})
+	public String excluir2(@RequestParam(value = "id") long id, 
+			@RequestParam(value = "action") String action) {
+		if (action.equals("delete"))
+			convidados.delete(id);
 		//attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
 		return "redirect:/convidados";
 	}
