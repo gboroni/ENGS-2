@@ -29,10 +29,11 @@
 
 					<thead>
 						<tr>
-							<th>Nome</th>
-							<th>Acompanhantes</th>
-							<th>id</th>
-							<th class="col-md-1"></th>
+							<th class="text-center">Nome</th>
+							<th class="text-center">Acompanhantes</th>
+							<th class="text-center">id</th>
+							<th class="col-md-1 text-center">Editar</th>
+							<th class="col-md-1 text-center">Excluir</th>
 
 						</tr>
 					</thead>
@@ -41,11 +42,12 @@
 						<tr th:each="convidado : ${convidados}">
 							<td th:text="${convidado.nome}"></td>
 							<td th:text="${convidado.quantidadeAcompanhantes}"></td>
-							<td th:text="${convidado.id}"></td>
+							<td class="text-center" th:text="${convidado.id}"></td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
 								th:href="@{/convidados/{id}(id=${convidado.id})}"> <span
 									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs"
+							</a></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
 								onclick="return confirm('Tem certeza que deseja excluir?')"
 								th:href="@{/convidados/(id=${convidado.id}, action='delete')}">
 									<span class="glyphicon glyphicon-remove"></span>
