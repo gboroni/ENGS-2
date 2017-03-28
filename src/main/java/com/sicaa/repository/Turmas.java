@@ -14,4 +14,8 @@ public interface Turmas extends JpaRepository<Turma, Long> {
 	@Query(value="select t.id as id, t.codigo as codigo, d.id as id_disciplina, d.nome as nome_disciplina from tb_turma t inner join tb_disciplina d on t.id_disciplina = d.id", nativeQuery=true)
 	List<Turma> findAllTurmas();
 	
+	@Modifying
+	@Query(value="select t.id as id, t.codigo as codigo, d.id as id_disciplina, d.nome as nome_disciplina from tb_turma t inner join tb_disciplina d on t.id_disciplina = d.id", nativeQuery=true)
+	List<Turma> findAll();
+	
 }
