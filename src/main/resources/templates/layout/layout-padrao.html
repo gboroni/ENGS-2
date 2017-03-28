@@ -58,13 +58,29 @@
 
 		    <nav class="aw-menu  js-menu">
 		      <ul class="aw-menu__list">
-		
-		        <li class="aw-menu__item" sec:authorize="hasRole('ROLE_CADASTRAR_VINHO')">
-		          <a th:href="@{/vinhos/novo}"><i class="fa  fa-fw  fa-home"></i><span>Cadastro vinho</span></a>
-		        </li>
-		        
 		        <li class="aw-menu__item" sec:authorize="hasRole('ROLE_PESQUISAR_VINHO')">
-		          <a th:href="@{/vinhos}"><i class="fa  fa-fw  fa-home"></i><span>Pesquisa vinho</span></a>
+		          <a th:href="@{/disciplinas}"><i class="fa  fa-fw  fa-home"></i><span>Disciplinas</span></a>
+		        </li>
+		        <li class="aw-menu__item" sec:authorize="hasRole('ROLE_PESQUISAR_VINHO')">
+		          <a th:href="@{/docentes}"><i class="fa  fa-fw  fa-home"></i><span>Docentes</span></a>
+		        </li>
+		        <li class="aw-menu__item" sec:authorize="hasRole('ROLE_PESQUISAR_VINHO')">
+		          <a th:href="@{/turmas}"><i class="fa  fa-fw  fa-home"></i><span>Turmas</span></a>
+		        </li>
+		        <li class="aw-menu__item" sec:authorize="hasRole('ROLE_PESQUISAR_VINHO')">
+		          <a th:href="@{/avaliacoes}"><i class="fa  fa-fw  fa-home"></i><span>Avaliações</span></a>
+		        </li>
+		        <li class="aw-menu__item" sec:authorize="hasRole('ROLE_PESQUISAR_VINHO')">
+		          <a th:href="@{/apresentacoes}"><i class="fa  fa-fw  fa-home"></i><span>Apresentações</span></a>
+		        </li>
+		        <li class="aw-menu__item" sec:authorize="hasRole('ROLE_PESQUISAR_VINHO')">
+		          <a th:href="@{/criterios}"><i class="fa  fa-fw  fa-home"></i><span>Critérios</span></a>
+		        </li>
+		        <li class="aw-menu__item" sec:authorize="hasRole('ROLE_PESQUISAR_VINHO')">
+		          <a th:href="@{/temas}"><i class="fa  fa-fw  fa-home"></i><span>Temas</span></a>
+		        </li>
+		        <li class="aw-menu__item">
+		          <a th:href="@{/alunos}"><i class="fa  fa-fw  fa-home"></i><span>Alunos</span></a>
 		        </li>
 		
 		      </ul>
