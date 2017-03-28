@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout-padrao}">
+
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<!-- 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/> -->
+<!-- 		<link rel="stylesheet" type="text/css" href="/css/style.css"/> -->
+<title>Lista de Disciplinas</title>
+</head>
+<body>
+	<section layout:fragment="conteudo">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title">Listar de Disciplinas</h1>
+					<a class="btn btn-link aw-link-panel" href="/disciplinas/novo">Novo
+						Disciplina</a>
+				</div>
+			</div>
+			<div class="alert alert-success"
+				th:if="${!#strings.isEmpty(mensagem)}">
+				<table>
+					<tbody>
+						<tr th:each="m : ${mensagem}">
+							<td th:text="${m}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-body">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center">id</th>
+							<th class="text-center">Nome</th>
+							<th class="col-md-1 text-center">Editar</th>
+							<th class="col-md-1 text-center">Excluir</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="disciplina : ${disciplinas}">
+							<td class="text-center" th:text="${disciplina.id}"></td>
+							<td th:text="${disciplina.nome}"></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/disciplinas/{id}(id=${disciplina.id})}"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								onclick="return confirm('Tem certeza que deseja excluir?')"
+								th:href="@{/disciplinas/(id=${disciplina.id}, action='delete')}"> <span
+									class="glyphicon glyphicon-remove"></span>
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	</section>
+</body>
+
+</html>
