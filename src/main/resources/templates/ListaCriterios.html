@@ -10,16 +10,16 @@
 <meta name="viewport" content="width=device-width" />
 <!-- 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/> -->
 <!-- 		<link rel="stylesheet" type="text/css" href="/css/style.css"/> -->
-<title>Lista de Temas</title>
+<title>Lista de Criterios</title>
 </head>
 <body>
 	<section layout:fragment="conteudo">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="clearfix">
-					<h1 class="panel-title">Listar de Temas</h1>
-					<a class="btn btn-link aw-link-panel" href="/temas/novo">Novo
-						Tema</a>
+					<h1 class="panel-title">Listar de Criterios</h1>
+					<a class="btn btn-link aw-link-panel" href="/criterios/novo">Novo
+						Criterio</a>
 				</div>
 			</div>
 			<div class="alert alert-success"
@@ -37,24 +37,26 @@
 					<thead>
 						<tr>
 							<th class="text-center">id</th>
-							<th class="text-center">Nome</th>
+							<th class="text-center">Descrição</th>
+							<th class="text-center">Peso</th>
 							<th class="col-md-1 text-center">Editar</th>
 							<th class="col-md-1 text-center">Excluir</th>
 
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="tema : ${temas}">
-							<td class="text-center" th:text="${tema.id}"></td>
-							<td th:text="${tema.nome}"></td>
+						<tr th:each="criterio : ${criterios}">
+							<td class="text-center" th:text="${criterio.id}"></td>
+							<td th:text="${criterio.descricao}"></td>
+							<td th:text="${criterio.peso}"></td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/temas/{id}(id=${tema.id})}"> <span
+								th:href="@{/criterios/{id}(id=${criterio.id})}"> <span
 									class="glyphicon glyphicon-pencil"></span>
 							</a></td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
 								onclick="return confirm('Tem certeza que deseja excluir?')"
-								th:href="@{/temas/(id=${tema.id}, action='delete')}"> <span
-									class="glyphicon glyphicon-remove"></span>
+								th:href="@{/criterios/(id=${criterio.id}, action='delete')}">
+									<span class="glyphicon glyphicon-remove"></span>
 							</a></td>
 						</tr>
 					</tbody>

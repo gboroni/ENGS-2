@@ -13,39 +13,42 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sicaa.model.Tema;
+import com.sicaa.model.Criterio;
 import com.sicaa.model.ErrorCustom;
-import com.sicaa.repository.Temas;
+import com.sicaa.repository.Criterios;
 
 @Controller
-@RequestMapping("/temas")
-public class TemasController {
+@RequestMapping("/criterios")
+public class CriteriosController {
 
 	@Autowired
-	private Temas temas;
+	private Criterios criterios;
 
 	@GetMapping("/novo")
 	public ModelAndView listar() {
 
-		ModelAndView mvw = new ModelAndView("CadastroTemas");
-		mvw.addObject("temas", temas.findAll());
-		mvw.addObject(new Tema());
+		ModelAndView mvw = new ModelAndView("CadastroCriterios");
+		mvw.addObject("criterios", criterios.findAll());
+		mvw.addObject(new Criterio());
 		return mvw;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView salvar(Tema tema, BindingResult bindingResult) {
-		ModelAndView mv = new ModelAndView("CadastroTemas");
+	public ModelAndView salvar(Criterio criterio, BindingResult bindingResult) {
+		ModelAndView mv = new ModelAndView("CadastroCriterios");
 		if (bindingResult.hasErrors()) {
 			mv.addObject("mensagem", ErrorCustom.getMensagemErro(bindingResult.getAllErrors().get(0)));
 		} else {
 			List<String> msg = new ArrayList<String>();
-			if (tema.getNome().trim().equals("")) {
-				msg.add("*" + "O tema não pode ser vazio!");
+			if (criterio.getDescricao().trim().equals("")) {
+				msg.add("*" + "A descrição não pode ser vazia!");
 				;
 			}
+			if (criterio.getPeso() == null || criterio.getPeso() <= 0) {
+				msg.add("*" + "Um critério não pode ter peso abaixo de 1!");
+			}
 			if (msg.size() == 0) {
-				this.temas.save(tema);
+				this.criterios.save(criterio);
 				msg.add("Salvo com sucesso!");
 				mv = this.pesquisar();
 				mv.addObject("mensagem", msg);
@@ -59,32 +62,32 @@ public class TemasController {
 
 	@RequestMapping
 	public ModelAndView pesquisar() {
-		List<Tema> todosTemas = temas.findAll();
-		ModelAndView mv = new ModelAndView("ListaTemas");
-		mv.addObject("temas", todosTemas);
+		List<Criterio> todosCriterios = criterios.findAll();
+		ModelAndView mv = new ModelAndView("ListaCriterios");
+		mv.addObject("criterios", todosCriterios);
 		return mv;
 	}
 
 	@RequestMapping("{id}")
-	public ModelAndView edicao(@PathVariable("id") Tema tema) {
-		ModelAndView mv = new ModelAndView("CadastroTemas");
-		mv.addObject(tema);
+	public ModelAndView edicao(@PathVariable("id") Criterio criterio) {
+		ModelAndView mv = new ModelAndView("CadastroCriterios");
+		mv.addObject(criterio);
 		return mv;
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	public String excluir(@PathVariable Long id) {
-		temas.delete(id);
+		criterios.delete(id);
 		// attributes.addFlashAttribute("mensagem", "Título excluído com
 		// sucesso!");
-		return "redirect:/temas";
+		return "redirect:/criterios";
 	}
 
 	@RequestMapping(params = { "id", "action" })
 	public ModelAndView excluir2(@RequestParam(value = "id") long id, @RequestParam(value = "action") String action) {
 		if (action.equals("delete"))
-			temas.delete(id);
-		ModelAndView mv = new ModelAndView("ListaTemas");
+			criterios.delete(id);
+		ModelAndView mv = new ModelAndView("ListaCriterios");
 		List<String> msg = new ArrayList<>();
 		msg.add("Excluido com sucesso!");
 		mv = this.pesquisar();
