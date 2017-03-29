@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout-padrao}">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<!-- 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/> -->
+<!-- 		<link rel="stylesheet" type="text/css" href="/css/style.css"/> -->
+
+
+<title>Cadastro de Apresentacaos</title>
+</head>
+<body>
+	<section layout:fragment="conteudo">
+		<div>
+			<form class="form-horizontal" method="POST" style="margin: 20px 0"
+				th:object="${apresentacao}" th:action="@{/apresentacaos}">
+				<div class="alert alert-danger"
+					th:if="${!#strings.isEmpty(mensagem)}">
+					<table>
+						<tbody>
+							<tr th:each="m : ${mensagem}">
+								<td th:text="${m}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="panel panel-default">
+					<!-- 				<div class="form-group"> -->
+
+					<div class="panel-heading">
+						<div class="clearfix">
+							<h1 class="panel-title aw-titulo-panel">Nova Apresentacao</h1>
+							<a class="btn btn-link aw-link-panel" href="/apresentacaos">Voltar
+								para pesquisa</a>
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<label for="Peso" class="col-sm-1 control-label">Tema</label>
+						<div class="col-sm-4">
+							<select th:field="*{id_tema}">
+								<option value="0">Selecione um Tema</option>
+								<option th:each="i : ${temas}" th:value="${i.id}"
+									th:text="${i.nome}"></option>
+							</select> <a class="btn btn-link aw-link-panel" href="/temas/novo">
+								Cadastrar Tema</a>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="Inicio" class="col-sm-1 control-label">Início</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="Inicio"
+								th:field="*{inicio}" data-provide="datepicker"
+								placeholder="dd/mm/aaaa"
+								data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+								data-date-autoclose="true" data-date-today-highlight="true"
+								data-date-orientation="bottom" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="Fim" class="col-sm-1 control-label">Término</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="Fim"
+								th:field="*{fim}" data-provide="datepicker"
+								placeholder="dd/mm/aaaa"
+								data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+								data-date-autoclose="true" data-date-today-highlight="true"
+								data-date-orientation="bottom" />
+						</div>
+					</div>
+
+					<input type="hidden" th:field="*{id}" />
+
+					<button type="submit" class="btn btn-primary">Salvar</button>
+				</div>
+
+			</form>
+		</div>
+
+	</section>
+
+</body>
+</html>

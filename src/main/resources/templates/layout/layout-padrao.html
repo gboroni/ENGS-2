@@ -71,7 +71,7 @@
 		          <a th:href="@{/avaliacoes}"><i class="fa  fa-fw  fa-home"></i><span>Avaliações</span></a>
 		        </li>
 		        <li class="aw-menu__item" sec:authorize="hasRole('ROLE_PESQUISAR_VINHO')">
-		          <a th:href="@{/apresentacoes}"><i class="fa  fa-fw  fa-home"></i><span>Apresentações</span></a>
+		          <a th:href="@{/apresentacaos}"><i class="fa  fa-fw  fa-home"></i><span>Apresentações</span></a>
 		        </li>
 		        <li class="aw-menu__item" sec:authorize="hasRole('ROLE_PESQUISAR_VINHO')">
 		          <a th:href="@{/criterios}"><i class="fa  fa-fw  fa-home"></i><span>Critérios</span></a>
@@ -103,6 +103,8 @@
 <script th:src="@{/layout/vendors/jquery/jquery.js}"></script>
 
 <script th:src="@{/javascripts/vendors/jquery.masknumber.min.js}"></script>
+<script src="/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/bootstrap-datepicker.pt-BR.min.js"></script>
 
 	
 

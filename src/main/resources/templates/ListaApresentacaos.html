@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout-padrao}">
+
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<!-- 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/> -->
+<!-- 		<link rel="stylesheet" type="text/css" href="/css/style.css"/> -->
+<title>Lista de Apresentacaos</title>
+</head>
+<body>
+	<section layout:fragment="conteudo">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title">Listar de Apresentacaos</h1>
+					<a class="btn btn-link aw-link-panel" href="/apresentacaos/novo">Nova
+						Apresentacao</a>
+				</div>
+			</div>
+			<div class="alert alert-success"
+				th:if="${!#strings.isEmpty(mensagem)}">
+				<table>
+					<tbody>
+						<tr th:each="m : ${mensagem}">
+							<td th:text="${m}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-body">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center">Tema</th>
+							<th class="text-center">Inicio</th>
+							<th class="text-center">Término</th>
+							<th class="text-center">Alunos</th>
+							<th class="col-md-1 text-center">Editar</th>
+							<th class="col-md-1 text-center">Excluir</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="apresentacao : ${apresentacaos}">
+							<td width="30%" th:text="${apresentacao.id_tema}"></td>
+							<td th:text="${apresentacao.inicio}"></td>
+							<td th:text="${apresentacao.fim}"></td>
+							<td></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/apresentacaos/{id}(id=${apresentacao.id})}"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								onclick="return confirm('Tem certeza que deseja excluir?')"
+								th:href="@{/apresentacaos/(id=${apresentacao.id}, action='delete')}">
+									<span class="glyphicon glyphicon-remove"></span>
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	</section>
+</body>
+
+</html>
