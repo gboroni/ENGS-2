@@ -28,6 +28,7 @@ public class ApresentacaoCriterio  implements Serializable {
 	private String descricao_criterio;
 	
 	private Integer peso_criterio;
+	
 
 	public long getId() {
 		return id;
