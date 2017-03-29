@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout-padrao}">
+
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<!-- 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/> -->
+<!-- 		<link rel="stylesheet" type="text/css" href="/css/style.css"/> -->
+<title>Lista de Apresentações</title>
+</head>
+
+<body>
+	<section layout:fragment="conteudo">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title">Listar de Convidados</h1>
+					<a class="btn btn-link aw-link-panel" href="/convidados/novo">Novo
+						Convidado</a>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				<table class="table table-bordered table-striped">
+
+					<thead>
+						<tr>
+							<th class="text-center">Nome</th>
+							<th class="text-center">Acompanhantes</th>
+							<th class="text-center">id</th>
+							<th class="col-md-1 text-center">Editar</th>
+							<th class="col-md-1 text-center">Excluir</th>
+
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="convidado : ${convidados}">
+							<td th:text="${convidado.nome}"></td>
+							<td th:text="${convidado.quantidadeAcompanhantes}"></td>
+							<td class="text-center" th:text="${convidado.id}"></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/convidados/{id}(id=${convidado.id})}"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								onclick="return confirm('Tem certeza que deseja excluir?')"
+								th:href="@{/convidados/(id=${convidado.id}, action='delete')}">
+									<span class="glyphicon glyphicon-remove"></span>
+							</a></td>
+						</tr>
+					</tbody>
+
+				</table>
+				<!-- 				<div layout:include="DialogoConfirmacaoExclusao"></div> -->
+			</div>
+	</section>
+	<th:block layout:fragment="javascript-extra">
+		<script th:src="@{/javascripts/excluir-vinho-modal.js}"></script>
+	</th:block>
+
+</body>
+
+</html>
