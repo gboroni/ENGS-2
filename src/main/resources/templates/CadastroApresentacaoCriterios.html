@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout-padrao}">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
@@ -15,7 +16,8 @@
 	<section layout:fragment="conteudo">
 		<div>
 			<form class="form-horizontal" method="POST" style="margin: 20px 0"
-				th:object="${apresentacaocriterio}" th:action="@{/apresentacaocriterios}">
+				th:object="${apresentacaocriterio}"
+				th:action="@{/apresentacaocriterios}">
 				<div class="alert alert-danger"
 					th:if="${!#strings.isEmpty(mensagem)}">
 					<table>
@@ -30,37 +32,58 @@
 					<!-- 				<div class="form-group"> -->
 					<div class="panel-heading">
 						<div class="clearfix">
-							<h1 class="panel-title aw-titulo-panel">Cadastro de Criterios para Apresentação</h1>
-							<a class="btn btn-link aw-link-panel" href="/apresentacaocriterios">Voltar
-								para pesquisa</a>
+							<h1 class="panel-title aw-titulo-panel">Cadastro de
+								Criterios para Apresentação</h1>
+							<a class="btn btn-link aw-link-panel"
+								href="/apresentacaocriterios">Voltar para pesquisa</a>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="Peso" class="col-sm-1 control-label">Apresentação</label>
-						<div class="col-sm-4">
-							<select th:field="*{id_apresentacao}">
-							<option value="0"> Selecione uma Apresentação</option>
-								<option th:each="i : ${apresentacaos}" th:value="${i.id}"
-									th:text="${i.id}"></option>
-							</select>
+						<label for="Peso" class="col-sm-1 control-label">Apresentação:</label>
+						<div class="col-sm-2">
+							<input type="text" th:field="*{id_apresentacao}" />
+
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="Peso" class="col-sm-1 control-label">Critérios</label>
 						<div class="col-sm-4">
 							<select th:field="*{id_criterio}">
-							<option value="0"> Selecione uma disciplina</option>
+								<option value="0">Selecione um critério</option>
 								<option th:each="i : ${criterios}" th:value="${i.id}"
 									th:text="${i.descricao}"></option>
-							</select>
-							<a class="btn btn-link aw-link-panel" href="/criterios/novo">
+							</select> <a class="btn btn-link aw-link-panel" href="/criterios/novo">
 								Cadastrar Critério</a>
 						</div>
 					</div>
-					<input type="hidden" th:field="*{id}" />
-					<button type="submit" class="btn btn-primary">Salvar</button>
+					<input type="hidden" th:field="*{id}" /> 
+					<button type="submit" class="btn btn-primary">Adicionar</button>
 				</div>
 			</form>
+		</div>
+
+		<div class="panel-body">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="text-center">Critério</th>
+						<th class="text-center">Peso</th>
+						<th class="col-md-1 text-center">Excluir</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="apresentacaocriterio : ${apresentacaocriterios}">
+						<td width="30%"
+							th:text="${apresentacaocriterio.descricao_criterio}"></td>
+						<td th:text="${apresentacaocriterio.peso_criterio}"></td>
+						<td class="text-center"><a class="btn btn-link btn-xs"
+							onclick="return confirm('Tem certeza que deseja excluir?')"
+							th:href="@{/s/(id=${.id}, action='delete')}"> <span
+								class="glyphicon glyphicon-remove"></span>
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</section>
 </body>
