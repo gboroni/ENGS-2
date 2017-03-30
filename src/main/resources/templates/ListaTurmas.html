@@ -32,12 +32,13 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body" id="divbody">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<th class="text-center">Código</th>
 							<th class="text-center">Disciplina</th>
+							<th class="col-md-1 text-center">Alunos</th>
 							<th class="col-md-1 text-center">Editar</th>
 							<th class="col-md-1 text-center">Excluir</th>
 
@@ -47,6 +48,10 @@
 						<tr th:each="turma : ${turmas}">
 							<td th:text="${turma.codigo}"></td>
 							<td th:text="${turma.nome_disciplina}"></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/turmaalunos/(id=${turma.id})}"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a></td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
 								th:href="@{/turmas/{id}(id=${turma.id})}"> <span
 									class="glyphicon glyphicon-pencil"></span>

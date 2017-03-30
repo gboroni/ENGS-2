@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout-padrao}">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<!-- 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/> -->
+<!-- 		<link rel="stylesheet" type="text/css" href="/css/style.css"/> -->
+
+
+<title>Cadastro de Alunos na Turma</title>
+</head>
+<body>
+	<section layout:fragment="conteudo">
+		<div>
+			<form class="form-horizontal" method="POST" style="margin: 20px 0"
+				th:object="${turmaaluno}"
+				th:action="@{/turmaalunos}">
+				<div class="alert alert-danger"
+					th:if="${!#strings.isEmpty(mensagem)}">
+					<table>
+						<tbody>
+							<tr th:each="m : ${mensagem}">
+								<td th:text="${m}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="alert alert-success"
+					th:if="${!#strings.isEmpty(mensagem_sucesso)}">
+					<table>
+						<tbody>
+							<tr th:each="m : ${mensagem_sucesso}">
+								<td th:text="${m}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="panel panel-default">
+					<!-- 				<div class="form-group"> -->
+					<div class="panel-heading">
+						<div class="clearfix">
+							<h1 class="panel-title aw-titulo-panel">Cadastro de
+								Criterios para Apresentação</h1>
+							<a class="btn btn-link aw-link-panel"
+								href="/apresentacaos">Voltar para pesquisa</a>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="Peso" class="col-sm-1 control-label">Turma</label>
+						<div class="col-sm-6">
+							<select th:field="*{id_turma}" disabled>
+								<option value="0">Selecione uma Turma</option>
+								<option th:each="i : ${turmas}" th:value="${i.id}"
+									th:text="  ${i.nome_disciplina} + '  -  ' +${i.codigo}"></option>
+							</select>
+							
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="Peso" class="col-sm-1 control-label">Alunos</label>
+						<div class="col-sm-4">
+							<select th:field="*{id_aluno}">
+								<option value="0">Selecione um aluno</option>
+								<option th:each="i : ${alunos}" th:value="${i.id}"
+									th:text="${i.nome}"></option>
+							</select> <a class="btn btn-link aw-link-panel" href="/alunos/novo">
+								Cadastrar Aluno</a>
+						</div>
+					</div>
+					<input type="hidden" th:field="*{id}" /> 
+					<button type="submit" class="btn btn-primary">Adicionar</button>
+				</div>
+			</form>
+		</div>
+
+		<div class="panel-body">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+					<th class="text-center"  width="20%">Matricula</th>
+						<th class="text-center" width="60%">Aluno</th>
+						<th class="col-md-1 text-center"  width="20%">Excluir</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="turmaaluno : ${turmaalunos}">
+						<td width="30%"
+							th:text="${turmaaluno.matricula_aluno}"></td>
+						<td th:text="${turmaaluno.nome_aluno}"></td>
+						<td class="text-center"><a class="btn btn-link btn-xs"
+							onclick="return confirm('Tem certeza que deseja excluir?')"
+							th:href="@{/turmaalunos/(id=${turmaaluno.id}, action='delete')}"> <span
+								class="glyphicon glyphicon-remove"></span>
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</body>
+</html>
