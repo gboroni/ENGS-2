@@ -11,7 +11,7 @@ import com.sicaa.model.TurmaAluno;
 public interface TurmaAlunos extends JpaRepository<TurmaAluno, Long> {
 	
 	@Modifying
-	@Query(value="select ac.id as id, ac.id_criterio  as id_criterio, ac.id_apresentacao as id_apresentacao, c.descricao as descricao_criterio, c.peso as peso_criterio  from Tb_apresentacao_criterio ac inner join Tb_Criterio c on ac.id_criterio = c.id where ac.id_apresentacao = ?", nativeQuery=true)
+	@Query(value="select ta.id as id, ta.id_aluno as id_aluno, ta.id_turma as id_turma, t.codigo as codigo_turma, d.nome as nome_disciplina, a.nome as nome_aluno, a.matricula as matricula_aluno from tb_turma_aluno ta join tb_aluno a on a.id = ta.id_aluno join tb_turma t on t.id = ta.id_turma join tb_disciplina d on t.id_disciplina = d.id where t.id = ?", nativeQuery=true)
 	List<TurmaAluno> findAllAlunosByTurma(Integer idTurma);
 	
 }

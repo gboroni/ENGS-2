@@ -43,20 +43,19 @@
 					<div class="panel-heading">
 						<div class="clearfix">
 							<h1 class="panel-title aw-titulo-panel">Cadastro de
-								Criterios para Apresentação</h1>
+								Alunos em Turmas</h1>
 							<a class="btn btn-link aw-link-panel"
-								href="/apresentacaos">Voltar para pesquisa</a>
+								href="/turmas">Voltar para pesquisa</a>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="Peso" class="col-sm-1 control-label">Turma</label>
 						<div class="col-sm-6">
-							<select th:field="*{id_turma}" disabled>
+							<select th:field="*{id_turma}">
 								<option value="0">Selecione uma Turma</option>
 								<option th:each="i : ${turmas}" th:value="${i.id}"
 									th:text="  ${i.nome_disciplina} + '  -  ' +${i.codigo}"></option>
 							</select>
-							
 						</div>
 					</div>
 					<div class="form-group">
@@ -86,13 +85,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="turmaaluno : ${turmaalunos}">
+					<tr th:each="turmaaluno : ${talunos}">
 						<td width="30%"
 							th:text="${turmaaluno.matricula_aluno}"></td>
 						<td th:text="${turmaaluno.nome_aluno}"></td>
 						<td class="text-center"><a class="btn btn-link btn-xs"
 							onclick="return confirm('Tem certeza que deseja excluir?')"
-							th:href="@{/turmaalunos/(id=${turmaaluno.id}, action='delete')}"> <span
+							th:href="@{/turmaalunos/(id=${turmaaluno.id}, id_turma=${turmaaluno.id_turma}, action='delete')}"> <span
 								class="glyphicon glyphicon-remove"></span>
 						</a></td>
 					</tr>
