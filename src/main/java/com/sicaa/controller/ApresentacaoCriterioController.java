@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sicaa.model.ApresentacaoCriterio;
+import com.sicaa.model.TurmaAluno;
 import com.sicaa.repository.ApresentacaoCriterios;
 import com.sicaa.repository.Apresentacaos;
 import com.sicaa.repository.Criterios;
@@ -51,7 +52,7 @@ public class ApresentacaoCriterioController {
 		if (msg.size() == 0) {
 			this.apresentacaocriterios.save(apresentacaocriterio);
 			msg.add("Salvo com sucesso!");
-			mv = this.novo(id_apresentacao);
+			mv = this.redirect(id_apresentacao);
 			mv.addObject("mensagem_sucesso", msg);
 			return mv;
 		} else {
@@ -73,6 +74,20 @@ public class ApresentacaoCriterioController {
 		return mvw;
 	}
 
+	@RequestMapping(params = { "id", "mensagem_sucesso" })
+	public ModelAndView novo(@RequestParam(value = "id") Integer id,
+			@RequestParam(value = "mensagem_sucesso") String mensagem_sucesso) {
+		ModelAndView mvw = new ModelAndView("CadastroApresentacaoCriterios");
+		ApresentacaoCriterio ap = new ApresentacaoCriterio();
+		ap.setId_apresentacao(id);
+		mvw.addObject("criterios", criterios.findAll());
+		mvw.addObject("apresentacaos", apresentacaos.findAll());
+		mvw.addObject("apcriterios", apresentacaocriterios.findAllCriteriosByApresentacao(id));
+		mvw.addObject("mensagem_sucesso", mensagem_sucesso);
+		mvw.addObject("apresentacaocriterio", ap);
+		return mvw;
+	}
+
 	@RequestMapping(params = { "id", "id_apresentacao", "action" })
 	public ModelAndView excluir2(@RequestParam(value = "id") long id,
 			@RequestParam(value = "id_apresentacao") Integer id_apresentacao,
@@ -84,6 +99,12 @@ public class ApresentacaoCriterioController {
 		msg.add("Critério removido com sucesso!");
 		mvw.addObject("mensagem_sucesso", msg);
 
+		return mvw;
+	}
+
+	public ModelAndView redirect(Integer id) {
+		ModelAndView mvw = new ModelAndView("redirect:/apresentacaocriterios/");
+		mvw.addObject("id", id);
 		return mvw;
 	}
 

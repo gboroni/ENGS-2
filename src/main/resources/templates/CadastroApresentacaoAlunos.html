@@ -9,15 +9,14 @@
 <!-- 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/> -->
 <!-- 		<link rel="stylesheet" type="text/css" href="/css/style.css"/> -->
 
-
-<title>Cadastro de Criterios para Apresentação</title>
+<script th:src="@{/layout/javascripts/jquery.min.js}"></script>
+<title>Cadastro de Alunos em Apresentação</title>
 </head>
 <body>
 	<section layout:fragment="conteudo">
 		<div>
 			<form class="form-horizontal" method="POST" style="margin: 20px 0"
-				th:object="${apresentacaocriterio}"
-				th:action="@{/apresentacaocriterios}">
+				th:object="${apresentacaoaluno}" th:action="@{/apresentacaoalunos}">
 				<div class="alert alert-danger"
 					th:if="${!#strings.isEmpty(mensagem)}">
 					<table>
@@ -42,10 +41,10 @@
 					<!-- 				<div class="form-group"> -->
 					<div class="panel-heading">
 						<div class="clearfix">
-							<h1 class="panel-title aw-titulo-panel">Cadastro de
-								Criterios para Apresentação</h1>
-							<a class="btn btn-link aw-link-panel"
-								href="/apresentacaos">Voltar para pesquisa</a>
+							<h1 class="panel-title aw-titulo-panel">Cadastro de Alunos
+								para Apresentação</h1>
+							<a class="btn btn-link aw-link-panel" href="/apresentacaos">Voltar
+								para pesquisa</a>
 						</div>
 					</div>
 					<div class="form-group">
@@ -56,17 +55,58 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="Peso" class="col-sm-1 control-label">Critérios</label>
+						<label for="Peso" class="col-sm-1 control-label">Turmas</label>
 						<div class="col-sm-4">
-							<select th:field="*{id_criterio}">
-								<option value="0">Selecione um critério</option>
-								<option th:each="i : ${criterios}" th:value="${i.id}"
-									th:text="${i.descricao}"></option>
-							</select> <a class="btn btn-link aw-link-panel" href="/criterios/novo">
-								Cadastrar Critério</a>
+							<select th:field="*{id_turma}" id="selectTurma">
+								<option value="0">Selecione uma Turma</option>
+								<option th:each="i : ${turmas}" th:value="${i.id}"
+									th:text="${i.codigo +' - '+ i.nome_disciplina}"></option>
+							</select>
+							<script>
+								$('#selectTurma')
+										.change(
+												function() {
+													$("#selectAluno option")
+															.remove();
+													$
+															.getJSON(
+																	"/apresentacaoalunos?id_turma=2",
+																	function(
+																			response) {
+																		var options = '';
+																		$
+																				.each(
+																						response,
+																						function(
+																								index,
+																								item) {
+																							options += '<option value="' + item.id_aluno + '">'
+																									+ item.matricula_aluno
+																									+ ' - '
+																									+ item.nome_aluno
+																									+ '</option>';
+																							$(
+																									"#selectAluno")
+																									.html(
+																											options);
+																						});
+																	});
+
+												});
+							</script>
 						</div>
 					</div>
-					<input type="hidden" th:field="*{id}" /> 
+					<div class="form-group">
+						<label for="Peso" class="col-sm-1 control-label">Alunos</label>
+						<div class="col-sm-4">
+							<select th:field="*{id_aluno}" id="selectAluno">
+								<option value="0">Selecione um Aluno</option>
+
+							</select> <a class="btn btn-link aw-link-panel" href="/alunos/novo">
+								Cadastrar Aluno</a>
+						</div>
+					</div>
+					<input type="hidden" th:field="*{id}" />
 					<button type="submit" class="btn btn-primary">Adicionar</button>
 				</div>
 			</form>
@@ -76,20 +116,25 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="text-center" width="60%">Critério</th>
-						<th class="text-center"  width="20%">Peso</th>
-						<th class="col-md-1 text-center"  width="20%">Excluir</th>
+						<th class="text-center" width="20%">Matricula</th>
+						<th class="text-center" width="50%">Nome</th>
+						<th class="text-center" width="20%">Turma</th>
+						<th class="col-md-1 text-center" width="10%">Excluir</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="apresentacaocriterio : ${apcriterios}">
-						<td width="30%" 
-							th:text="${apresentacaocriterio.descricao_criterio}"></td>
-						<td th:text="${apresentacaocriterio.peso_criterio}" class="text-center"></td>
-						<td class="text-center"><a class="btn btn-link btn-xs"
+					<tr th:each="apresentacaoaluno : ${apalunos}">
+						<td width="20%" th:text="${apresentacaoaluno.matricula_aluno}"
+							class="text-center"></td>
+						<td width="50%" th:text="${apresentacaoaluno.nome_aluno}"
+							class="text-center"></td>
+						<td width="20%" th:text="${apresentacaoaluno.codigo_turma}"
+							class="text-center"></td>
+						<td width="10%" class="text-center"><a
+							class="btn btn-link btn-xs"
 							onclick="return confirm('Tem certeza que deseja excluir?')"
-							th:href="@{/apresentacaocriterios/(id=${apresentacaocriterio.id}, id_apresentacao=${apresentacaocriterio.id_apresentacao}, action='delete')}"> <span
-								class="glyphicon glyphicon-remove"></span>
+							th:href="@{/apresentacaoalunos/(id=${apresentacaoaluno.id}, id_apresentacao=${apresentacaoaluno.id_apresentacao}, action='delete')}">
+								<span class="glyphicon glyphicon-remove"></span>
 						</a></td>
 					</tr>
 				</tbody>

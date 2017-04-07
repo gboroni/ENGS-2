@@ -51,7 +51,10 @@
 							<td width="30%" th:text="${apresentacao.id_tema}"></td>
 							<td th:text="${apresentacao.inicio}"></td>
 							<td th:text="${apresentacao.fim}"></td>
-							<td></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/apresentacaoalunos/(id=${apresentacao.id})}"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a></td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
 								th:href="@{/apresentacaocriterios/(id=${apresentacao.id})}"> <span
 									class="glyphicon glyphicon-pencil"></span>

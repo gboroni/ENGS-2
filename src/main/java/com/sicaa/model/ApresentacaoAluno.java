@@ -28,6 +28,8 @@ public class ApresentacaoAluno  implements Serializable {
 	@Column
 	private Integer id_apresentacao;
 	
+	private String matricula_aluno;
+	
 	private String nome_aluno;
 	
 	private String codigo_turma;
@@ -79,5 +81,15 @@ public class ApresentacaoAluno  implements Serializable {
 	public void setCodigo_turma(String codigo_turma) {
 		this.codigo_turma = codigo_turma;
 	}
+
+	public String getMatricula_aluno() {
+		return matricula_aluno;
+	}
+
+	public void setMatricula_aluno(String matricula_aluno) {
+		this.matricula_aluno = matricula_aluno;
+	}
+	
+	
 	
 }
