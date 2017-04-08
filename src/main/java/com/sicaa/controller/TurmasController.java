@@ -56,14 +56,22 @@ public class TurmasController {
 			if (msg.size() == 0) {
 				this.turmas.save(turma);
 				msg.add("Salvo com sucesso!");
-				mv = this.pesquisar();
-				mv.addObject("turmas", turmas.findAllTurmas());
+				mv = new ModelAndView("redirect:/turmas/");
 				mv.addObject("mensagem", msg);
 				return mv;
 			} else {
 				mv.addObject("mensagem", msg);
 			}
 		}
+		return mv;
+	}
+	
+	@RequestMapping(params = { "mensagem" })
+	public ModelAndView listarSucesso(@RequestParam(value = "mensagem") String mensagem) {
+		List<Turma> todosTurmas = turmas.findAllTurmas();
+		ModelAndView mv = new ModelAndView("ListaTurmas");
+		mv.addObject("turmas", todosTurmas);
+		mv.addObject("mensagem",mensagem);
 		return mv;
 	}
 
