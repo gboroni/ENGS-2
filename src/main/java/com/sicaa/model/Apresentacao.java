@@ -40,6 +40,8 @@ public class Apresentacao implements Serializable {
 
 	@Column
 	private Boolean status;
+	
+	private String nome_tema;
 
 	public long getId() {
 		return id;
@@ -80,5 +82,15 @@ public class Apresentacao implements Serializable {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
+
+	public String getNome_tema() {
+		return nome_tema;
+	}
+
+	public void setNome_tema(String nome_tema) {
+		this.nome_tema = nome_tema;
+	}
+	
+	
 
 }

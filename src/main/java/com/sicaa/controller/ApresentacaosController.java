@@ -32,7 +32,7 @@ public class ApresentacaosController {
 	public ModelAndView listar() {
 
 		ModelAndView mvw = new ModelAndView("CadastroApresentacaos");
-		mvw.addObject("apresentacaos", apresentacaos.findAll());
+		mvw.addObject("apresentacaos", apresentacaos.findAllApresentacaos());
 		mvw.addObject("temas",temas.findAll());
 		mvw.addObject(new Apresentacao());
 		return mvw;
@@ -59,7 +59,7 @@ public class ApresentacaosController {
 			if (msg.size() == 0) {
 				this.apresentacaos.save(apresentacao);
 				msg.add("Salvo com sucesso!");
-				mv = this.pesquisar();
+				mv = new ModelAndView("redirect:/apresentacaos/");
 				mv.addObject("mensagem", msg);
 				return mv;
 			} else {
@@ -71,9 +71,18 @@ public class ApresentacaosController {
 
 	@RequestMapping
 	public ModelAndView pesquisar() {
-		List<Apresentacao> todosApresentacaos = apresentacaos.findAll();
+		List<Apresentacao> todosApresentacaos = apresentacaos.findAllApresentacaos();
 		ModelAndView mv = new ModelAndView("ListaApresentacaos");
 		mv.addObject("apresentacaos", todosApresentacaos);
+		return mv;
+	}
+	
+	@RequestMapping(params = { "mensagem" })
+	public ModelAndView listarSucesso(@RequestParam(value = "mensagem") String mensagem) {
+		List<Apresentacao> todosApresentacaos = apresentacaos.findAllApresentacaos();
+		ModelAndView mv = new ModelAndView("ListaApresentacaos");
+		mv.addObject("apresentacaos", todosApresentacaos);
+		mv.addObject("mensagem",mensagem);
 		return mv;
 	}
 
