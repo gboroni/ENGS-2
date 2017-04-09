@@ -50,16 +50,21 @@ public class ApresentacaoAlunosController {
 		List<String> msg = new ArrayList<String>();
 		if (apresentacaoaluno.getId_apresentacao() == null || apresentacaoaluno.getId_apresentacao() <= 0) {
 			msg.add("*" + "Selecione uma apresentação!");
-			;
 		}
 		if (apresentacaoaluno.getId_turma() == null || apresentacaoaluno.getId_turma() <= 0) {
+			apresentacaoaluno.setId_turma(0);
 			msg.add("*" + "Selecione uma Turma!");
-			;
 		}
 		if (apresentacaoaluno.getId_aluno() == null || apresentacaoaluno.getId_aluno() <= 0) {
+			apresentacaoaluno.setId_aluno(0);
 			msg.add("*" + "Selecione um Aluno!");
-			;
 		}
+		
+		if (apresentacaoalunos.findAlunoByApresentacao(apresentacaoaluno.getId_apresentacao(), apresentacaoaluno.getId_aluno()) > 0) {
+			msg.add("*" + "Este aluno ja esta cadastrado nessa apresentacao!");
+			
+		}
+		
 		if (msg.size() == 0) {
 			this.apresentacaoalunos.save(apresentacaoaluno);
 			msg.add("Salvo com sucesso!");
