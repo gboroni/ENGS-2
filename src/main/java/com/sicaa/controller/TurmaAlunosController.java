@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sicaa.model.Cont;
 import com.sicaa.model.TurmaAluno;
 import com.sicaa.repository.Alunos;
+import com.sicaa.repository.Contador;
 import com.sicaa.repository.TurmaAlunos;
 import com.sicaa.repository.Turmas;
 
@@ -28,6 +30,9 @@ public class TurmaAlunosController {
 	@Autowired
 	private Turmas turmas;
 
+	@Autowired
+	private Contador contador;
+
 	@RequestMapping(params = { "id", "id_aluno", "id_turma" })
 	public ModelAndView salvar(@RequestParam(value = "id") Integer id,
 			@RequestParam(value = "id_aluno") Integer id_aluno, @RequestParam(value = "id_turma") Integer id_turma,
@@ -43,11 +48,16 @@ public class TurmaAlunosController {
 		List<String> msg = new ArrayList<String>();
 		if (turmaaluno.getId_aluno() == null || turmaaluno.getId_aluno() <= 0) {
 			msg.add("*" + "Selecione um aluno para adicionar!");
-			;
 		}
 		if (turmaaluno.getId_turma() == null || turmaaluno.getId_turma() <= 0) {
 			msg.add("*" + "Selecione uma turma!");
-			;
+		}
+
+		if (msg.size() == 0) {
+			Cont c = contador.findAlunoByTurma(id_turma, id_aluno);
+			if (c.getCont() > 0) {
+				msg.add("*" + "Este aluno ja foi adicionado nesta turma");
+			}
 		}
 		if (msg.size() == 0) {
 			this.turmaalunos.save(turmaaluno);
@@ -97,9 +107,10 @@ public class TurmaAlunosController {
 		mvw.addObject("turmaaluno", ap);
 		return mvw;
 	}
-	
-	@RequestMapping(params = { "id","id_turma", "action" })
-	public ModelAndView excluir2(@RequestParam(value = "id") long id, @RequestParam(value = "id_turma") Integer id_turma , @RequestParam(value = "action") String action) {
+
+	@RequestMapping(params = { "id", "id_turma", "action" })
+	public ModelAndView excluir2(@RequestParam(value = "id") long id,
+			@RequestParam(value = "id_turma") Integer id_turma, @RequestParam(value = "action") String action) {
 		if (action.equals("delete"))
 			turmaalunos.delete(id);
 		ModelAndView mv = redirect(id_turma);
