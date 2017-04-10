@@ -10,7 +10,6 @@ public class Response {
 	
 
 	public Response(Integer erro, String mensagem, Object result) {
-		super();
 		this.erro = erro;
 		this.mensagem = mensagem;
 		this.result = result;

@@ -1,7 +1,7 @@
 package com.sicaa.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -42,6 +42,8 @@ public class Apresentacao implements Serializable {
 	private Boolean status;
 	
 	private String nome_tema;
+	
+	private BigInteger avaliacoes;
 
 	public long getId() {
 		return id;
@@ -90,7 +92,14 @@ public class Apresentacao implements Serializable {
 	public void setNome_tema(String nome_tema) {
 		this.nome_tema = nome_tema;
 	}
-	
+
+	public BigInteger getAvaliacoes() {
+		return avaliacoes;
+	}
+
+	public void setAvaliacoes(BigInteger avaliacoes) {
+		this.avaliacoes = avaliacoes;
+	}
 	
 
 }
