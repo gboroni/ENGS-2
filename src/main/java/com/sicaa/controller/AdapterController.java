@@ -49,4 +49,23 @@ public class AdapterController {
 		return new ResponseApresentacao(0, "", apresentacaoAluno, apresentacaoCriterio);
 	}
 
+	@GetMapping("/avaliacao/{criterios}/{notas}/{aluno}/{avaliador}/{apresentacao}")
+	public ResponseApresentacao avaliar(@PathVariable(value = "criterios") String criterios,
+			@PathVariable(value = "notas") String notas, @PathVariable(value = "aluno") Integer aluno,
+			@PathVariable(value = "avaliador") String avaliador,
+			@PathVariable(value = "apresentacao") Integer apresentacao) {
+
+		String[] criterioArr = criterios.split(",");
+		for (String string : criterioArr) {
+			System.out.println(string);
+		}
+
+		String[] notasArr = notas.split(",");
+		for (String string : notasArr) {
+			System.out.println(string);
+		}
+
+		return new ResponseApresentacao(0, "", "", "");
+	}
+
 }
