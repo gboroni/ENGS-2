@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: SICAA
 Implementation-Version: 1.0.0-SNAPSHOT
-Built-By: guilhermeboroni
+Built-By: edmo
 Implementation-Vendor-Id: com.sicaa
-Build-Jdk: 1.8.0_121
+Build-Jdk: 1.8.0_111
 Implementation-URL: http://projects.spring.io/spring-boot/sicaa/
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.

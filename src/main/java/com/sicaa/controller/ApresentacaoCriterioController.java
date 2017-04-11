@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sicaa.model.ApresentacaoCriterio;
+import com.sicaa.model.Cont;
 import com.sicaa.model.TurmaAluno;
 import com.sicaa.repository.ApresentacaoCriterios;
 import com.sicaa.repository.Apresentacaos;
+import com.sicaa.repository.Contador;
 import com.sicaa.repository.Criterios;
 
 @Controller
@@ -27,6 +29,9 @@ public class ApresentacaoCriterioController {
 
 	@Autowired
 	private Criterios criterios;
+	
+	@Autowired
+	private Contador contador;
 
 	@RequestMapping(params = { "id", "id_apresentacao", "id_criterio" })
 	public ModelAndView salvar(@RequestParam(value = "id") Integer id,
@@ -48,6 +53,12 @@ public class ApresentacaoCriterioController {
 		if (apresentacaocriterio.getId_criterio() == null || apresentacaocriterio.getId_criterio() <= 0) {
 			msg.add("*" + "Selecione um critério!");
 			;
+		}
+		if (msg.size() == 0) {
+			Cont c = contador.findApresentacaoCriterio(id_apresentacao, id_criterio);
+			if (c.getCont() > 0) {
+				msg.add("*" + "Este critério já foi adicionado nesta turma");
+			}
 		}
 		if (msg.size() == 0) {
 			this.apresentacaocriterios.save(apresentacaocriterio);
