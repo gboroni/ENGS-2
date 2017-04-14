@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sicaa.model.ApresentacaoAluno;
+import com.sicaa.model.Cont;
 import com.sicaa.model.TurmaAluno;
 import com.sicaa.repository.ApresentacaoAlunos;
 import com.sicaa.repository.Apresentacaos;
+import com.sicaa.repository.Contador;
 import com.sicaa.repository.TurmaAlunos;
 import com.sicaa.repository.Turmas;
 
@@ -32,6 +34,9 @@ public class ApresentacaoAlunosController {
 
 	@Autowired
 	private TurmaAlunos alunos;
+	
+	@Autowired
+	private Contador contador;
 
 	@RequestMapping(params = { "id", "id_apresentacao", "id_aluno", "id_turma" })
 	public ModelAndView salvar(@RequestParam(value = "id") Integer id,
@@ -60,9 +65,11 @@ public class ApresentacaoAlunosController {
 			msg.add("*" + "Selecione um Aluno!");
 		}
 		
-		if (apresentacaoalunos.findAlunoByApresentacao(apresentacaoaluno.getId_apresentacao(), apresentacaoaluno.getId_aluno()) > 0) {
-			msg.add("*" + "Este aluno ja esta cadastrado nessa apresentacao!");
-			
+		if (msg.size() == 0) {
+			Cont c = contador.findApresentacaoAluno(apresentacaoaluno.getId_apresentacao(), apresentacaoaluno.getId_aluno());
+			if (c.getCont() > 0) {
+				msg.add("*" + "Este aluno ja pertence a esta apresentacao");
+			}
 		}
 		
 		if (msg.size() == 0) {
