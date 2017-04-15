@@ -10,14 +10,14 @@
 <meta name="viewport" content="width=device-width" />
 <!-- 		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/> -->
 <!-- 		<link rel="stylesheet" type="text/css" href="/css/style.css"/> -->
-<title>Lista de Apresentações</title>
+<title>Lista de Alunos</title>
 </head>
 <body>
 	<section layout:fragment="conteudo">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="clearfix">
-					<h1 class="panel-title">Lista de Apresentacões Avaliadas</h1>
+					<h1 class="panel-title">Lista de Alunos Avaliados</h1>
 
 				</div>
 			</div>
@@ -35,21 +35,32 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th class="text-center" width="80%">Tema</th>
-							<th class="text-center" width="20%">Avaliações</th>
+							<th class="text-center" width="20%">Matricula</th>
+							<th class="text-center" width="30%">Nome</th>
+							<th class="text-center" width="20%">Turma</th>
+							<th class="text-center" width="15%">Media</th>
+							<th class="text-center" width="15%">Avaliacoes</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="apresentacao : ${avaliacaosAvaliadas}">
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/avaliacaos/{id}(id=${apresentacao.id})}"> <span
-									th:text="${apresentacao.nome_tema}"></span>
-							</a></td>
-							<td class="text-center" th:text="${apresentacao.avaliacoes}"></td>
-						</tr>
-					</tbody>
-				</table>
+						<tr th:each="apresentacaoaluno : ${apalunos}">
+							<td width="20%" th:text="${apresentacaoaluno.matricula_aluno}"
+								class="text-center"></td>
+							<td width="50%" th:text="${apresentacaoaluno.nome_aluno}"
+								class="text-center"></td>
+							<td width="20%" th:text="${apresentacaoaluno.codigo_turma}"
+								class="text-center"></td>
+							<td><td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{{id}(id=${apresentacaoaluno.id_apresentacao} + '/' +${apresentacaoaluno.id})}">
+									<span> avaliacoes</span>
+							</a></td></td>
+							
+							<td></td>
+					</tr>
+				</tbody>
+			</table>
 			</div>
+	
 	</section>
 </body>
 
