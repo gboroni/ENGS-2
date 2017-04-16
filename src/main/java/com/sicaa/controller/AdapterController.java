@@ -1,9 +1,8 @@
 package com.sicaa.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sicaa.model.ApresentacaoAluno;
 import com.sicaa.model.ApresentacaoCriterio;
+import com.sicaa.model.Avaliacao;
 import com.sicaa.model.Response;
 import com.sicaa.model.ResponseApresentacao;
 import com.sicaa.repository.Alunos;
 import com.sicaa.repository.ApresentacaoAlunos;
 import com.sicaa.repository.ApresentacaoCriterios;
+import com.sicaa.repository.Avaliacaos;
 
 @RestController
 @RequestMapping("/api")
@@ -31,6 +32,9 @@ public class AdapterController {
 
 	@Autowired
 	private ApresentacaoAlunos apresentacaoalunos;
+	
+	@Autowired
+	private Avaliacaos avaliacaos;
 
 	@GetMapping("/login")
 	public Response listar() {
@@ -54,18 +58,25 @@ public class AdapterController {
 			@PathVariable(value = "notas") String notas, @PathVariable(value = "aluno") Integer aluno,
 			@PathVariable(value = "avaliador") String avaliador,
 			@PathVariable(value = "apresentacao") Integer apresentacao) {
+		
+		Avaliacao avaliacao = new Avaliacao();
 
 		String[] criterioArr = criterios.split(",");
-		for (String string : criterioArr) {
-			System.out.println(string);
-		}
-
 		String[] notasArr = notas.split(",");
-		for (String string : notasArr) {
-			System.out.println(string);
+		for (int cont = 0; cont<criterioArr.length; cont++) {
+//			System.out.println(Double.valueOf(notasArr[cont]));
+//			System.out.println(Integer.valueOf(criterioArr[cont]));
+			avaliacao = new Avaliacao();
+			avaliacao.setId_apresentacao_criterio(Integer.valueOf(criterioArr[cont]));
+			avaliacao.setData(new Date());
+			avaliacao.setAvaliador(avaliador);
+			avaliacao.setNota(Double.valueOf(notasArr[cont]));
+			avaliacao.setId_apresentacao_aluno(aluno);
+			avaliacao.setId_apresentacao(apresentacao);
+			avaliacaos.save(avaliacao);
 		}
-
-		return new ResponseApresentacao(0, "", "", "");
+		
+		return new ResponseApresentacao(0, "Avaliacao feita com sucesso!", "", "");
 	}
 
 }
