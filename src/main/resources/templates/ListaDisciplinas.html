@@ -18,7 +18,7 @@
 			<div class="panel-heading">
 				<div class="clearfix">
 					<h1 class="panel-title">Listar de Disciplinas</h1>
-					<a class="btn btn-link aw-link-panel" href="/disciplinas/novo">Novo
+					<a class="btn btn-link aw-link-panel" href="/disciplinas/novo">Nova
 						Disciplina</a>
 				</div>
 			</div>
@@ -36,7 +36,6 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th class="text-center">id</th>
 							<th class="text-center">Nome</th>
 							<th class="col-md-1 text-center">Editar</th>
 							<th class="col-md-1 text-center">Excluir</th>
@@ -45,7 +44,6 @@
 					</thead>
 					<tbody>
 						<tr th:each="disciplina : ${disciplinas}">
-							<td class="text-center" th:text="${disciplina.id}"></td>
 							<td th:text="${disciplina.nome}"></td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
 								th:href="@{/disciplinas/{id}(id=${disciplina.id})}"> <span
