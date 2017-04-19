@@ -57,7 +57,7 @@ public class ApresentacaoCriterioController {
 		if (msg.size() == 0) {
 			Cont c = contador.findApresentacaoCriterio(id_apresentacao, id_criterio);
 			if (c.getCont() > 0) {
-				msg.add("*" + "Este critério já foi adicionado nesta turma");
+				msg.add("*" + "Este critério já foi adicionado nesta apresentação");
 			}
 		}
 		if (msg.size() == 0) {

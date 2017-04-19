@@ -25,6 +25,9 @@ public interface Contador extends JpaRepository<Cont, Long> {
 	@Query(value="select count(*) as cont from tb_turma_aluno where id_turma = ?", nativeQuery=true)
 	Cont findAlunosByTurma(Integer id_turma);
 	
+	@Query(value="select count(*) as cont from tb_apresentacao_criterio where id_criterio = ?", nativeQuery=true)
+	Cont findCriterioByApresentacao(Integer id_criterio);
+	
 	
 	
 }
