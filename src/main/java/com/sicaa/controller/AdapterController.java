@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sicaa.model.Apresentacao;
 import com.sicaa.model.ApresentacaoAluno;
 import com.sicaa.model.ApresentacaoCriterio;
 import com.sicaa.model.Avaliacao;
@@ -18,6 +19,7 @@ import com.sicaa.model.ResponseApresentacao;
 import com.sicaa.repository.Alunos;
 import com.sicaa.repository.ApresentacaoAlunos;
 import com.sicaa.repository.ApresentacaoCriterios;
+import com.sicaa.repository.Apresentacaos;
 import com.sicaa.repository.Avaliacaos;
 
 @RestController
@@ -35,6 +37,9 @@ public class AdapterController {
 	
 	@Autowired
 	private Avaliacaos avaliacaos;
+	
+	@Autowired
+	private Apresentacaos apresentacaos;
 
 	@GetMapping("/login")
 	public Response listar() {
@@ -43,14 +48,24 @@ public class AdapterController {
 	}
 
 	@GetMapping("/apresentacao/{id}")
-	public ResponseApresentacao criteriosApresentacao(@PathVariable(value = "id") Integer id) {
+	public ResponseApresentacao criteriosApresentacao(@PathVariable(value = "id") String id) {
 		List<ApresentacaoCriterio> apresentacaoCriterio = new ArrayList<ApresentacaoCriterio>();
-		apresentacaoCriterio = apresentacaocriterios.findAllCriteriosByApresentacao(id);
+		
+		List<Apresentacao> ap = apresentacaos.findApresentacaoByCodigo(id);
+		
+		if (ap != null && !ap.isEmpty()){
+			Apresentacao apresentacao = ap.get(0);
+			apresentacaoCriterio = apresentacaocriterios.findAllCriteriosByApresentacao((int)apresentacao.getId());
 
-		List<ApresentacaoAluno> apresentacaoAluno = new ArrayList<ApresentacaoAluno>();
-		apresentacaoAluno = apresentacaoalunos.findAllAlunosByApresentacao(id);
-
-		return new ResponseApresentacao(0, "", apresentacaoAluno, apresentacaoCriterio);
+			List<ApresentacaoAluno> apresentacaoAluno = new ArrayList<ApresentacaoAluno>();
+			apresentacaoAluno = apresentacaoalunos.findAllAlunosByApresentacao((int)apresentacao.getId());
+			return new ResponseApresentacao(0, "", apresentacaoAluno, apresentacaoCriterio);
+			
+		}else {
+			return new ResponseApresentacao(1, "Apresentação não encontrada", null, null);
+			
+		}
+		
 	}
 
 	@GetMapping("/avaliacao/{criterios}/{notas}/{aluno}/{avaliador}/{apresentacao}")

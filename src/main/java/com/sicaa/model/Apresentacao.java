@@ -39,7 +39,7 @@ public class Apresentacao implements Serializable {
 	private Date fim;
 
 	@Column
-	private Boolean status;
+	private String codigo;
 	
 	private String nome_tema;
 	
@@ -77,12 +77,12 @@ public class Apresentacao implements Serializable {
 		this.fim = fim;
 	}
 
-	public Boolean getStatus() {
-		return status;
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getNome_tema() {

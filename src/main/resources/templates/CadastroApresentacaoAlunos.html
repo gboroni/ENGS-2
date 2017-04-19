@@ -70,7 +70,7 @@
 															.remove();
 													$
 															.getJSON(
-																	"/apresentacaoalunos?id_turma=2",
+																	"/apresentacaoalunos?id_turma="+$( "#selectTurma option:selected" ).val(),
 																	function(
 																			response) {
 																		var options = '';

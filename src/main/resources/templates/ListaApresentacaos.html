@@ -37,6 +37,7 @@
 					<thead>
 						<tr>
 							<th class="text-center">Tema</th>
+							<th class="text-center">Código</th>
 							<th class="text-center">Inicio</th>
 							<th class="text-center">Término</th>
 							<th class="text-center">Alunos</th>
@@ -48,7 +49,8 @@
 					</thead>
 					<tbody>
 						<tr th:each="apresentacao : ${apresentacaos}">
-							<td width="30%" th:text="${apresentacao.nome_tema}"></td>
+							<td width="20%" th:text="${apresentacao.nome_tema}"></td>
+							<td width="10%" th:text="${apresentacao.codigo}"></td>
 							<td th:text="${apresentacao.inicio}"></td>
 							<td th:text="${apresentacao.fim}"></td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
