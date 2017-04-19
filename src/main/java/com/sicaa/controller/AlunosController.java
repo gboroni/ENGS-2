@@ -47,7 +47,15 @@ public class AlunosController {
 			if (aluno.getMatricula().trim().equals("")) {
 				msg.add("*" + "A matrícula do aluno não pode ser vazia!");
 			}
+			
+			if (msg.size() == 0){
+				List<Aluno> a = alunos.findAlunosByMatricula(aluno.getMatricula());
+				if (a != null && !a.isEmpty()){
+					msg.add("*" + "Este aluno já existe!");
+				}
+			}
 			if (msg.size() == 0) {
+				
 				this.alunos.save(aluno);
 				msg.add("Salvo com sucesso!");
 				mv = this.pesquisar();

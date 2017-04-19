@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sicaa.model.Aluno;
 import com.sicaa.model.Apresentacao;
 import com.sicaa.model.ApresentacaoAluno;
 import com.sicaa.model.ApresentacaoCriterio;
@@ -66,6 +67,20 @@ public class AdapterController {
 			
 		}
 		
+	}
+	
+	@GetMapping("/aluno/{matricula}/{nome}")
+	public ResponseApresentacao cadastrarAluno(@PathVariable(value = "matricula") String matricula,@PathVariable(value = "nome") String nome) {
+		Aluno aluno = new Aluno();
+		aluno.setMatricula(matricula);
+		aluno.setNome(nome.replace("000", " "));
+		List<Aluno> a = alunos.findAlunosByMatricula(matricula);
+		if (a == null || a.isEmpty()){
+			alunos.save(aluno);
+		}
+
+		return new ResponseApresentacao(0, "", null, null);
+			
 	}
 
 	@GetMapping("/avaliacao/{criterios}/{notas}/{aluno}/{avaliador}/{apresentacao}")
