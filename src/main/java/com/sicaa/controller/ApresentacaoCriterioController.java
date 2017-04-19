@@ -103,6 +103,15 @@ public class ApresentacaoCriterioController {
 	public ModelAndView excluir2(@RequestParam(value = "id") long id,
 			@RequestParam(value = "id_apresentacao") Integer id_apresentacao,
 			@RequestParam(value = "action") String action) {
+		Cont c = contador.findAvaliacaoByApresentacao(id_apresentacao);
+		if (c.getCont() > 0) {
+			List<String> msg = new ArrayList<String>();
+			msg.add("*" + "Não é possível remover o critério pois a apresentação já possui uma avaliação!");
+			ModelAndView mv = this.novo(id_apresentacao);
+			mv.addObject("mensagem", msg);
+			return mv;
+		}
+		
 		if (action.equals("delete"))
 			apresentacaocriterios.delete(id);
 		ModelAndView mvw = novo(id_apresentacao);

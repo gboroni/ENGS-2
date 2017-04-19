@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sicaa.model.Turma;
+import com.sicaa.model.Cont;
 import com.sicaa.model.ErrorCustom;
 import com.sicaa.repository.Turmas;
+import com.sicaa.repository.Contador;
 import com.sicaa.repository.Disciplinas;
 
 @Controller
@@ -27,6 +29,9 @@ public class TurmasController {
 	
 	@Autowired
 	private Disciplinas disciplinas;
+	
+	@Autowired
+	private Contador contador;
 
 	@GetMapping("/novo")
 	public ModelAndView listar() {
@@ -101,9 +106,17 @@ public class TurmasController {
 
 	@RequestMapping(params = { "id", "action" })
 	public ModelAndView excluir2(@RequestParam(value = "id") long id, @RequestParam(value = "action") String action) {
+		ModelAndView mv = new ModelAndView("/ListaTurmas");
+		Cont c = contador.findAlunosByTurma((int)id);
+		if (c.getCont() > 0) {
+			mv = this.pesquisar();
+			List<String> msg = new ArrayList<String>();
+			msg.add("*" + "Não é possível remover a turma pois ela contém alunos matriculados!");
+			mv.addObject("mensagem_erro", msg);
+			return mv;
+		}
 		if (action.equals("delete"))
 			turmas.delete(id);
-		ModelAndView mv = new ModelAndView("ListaTurmas");
 		List<String> msg = new ArrayList<>();
 		msg.add("Excluido com sucesso!");
 		mv = this.pesquisar();
