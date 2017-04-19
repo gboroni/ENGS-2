@@ -1,6 +1,5 @@
 package com.sicaa.config;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -33,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers("/vinhos").hasRole("PESQUISAR_VINHO")
-				.antMatchers("/vinhos/**").hasRole("CADASTRAR_VINHO")
+				.antMatchers("/api/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
@@ -41,7 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 			.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			;
 	}
 
 

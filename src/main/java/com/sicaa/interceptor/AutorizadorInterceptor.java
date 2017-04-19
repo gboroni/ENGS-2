@@ -12,6 +12,9 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 
 		String uri = request.getRequestURI();
+		
+		if (uri.contains("api"))
+			return true;
 
 		return false;
 	}
