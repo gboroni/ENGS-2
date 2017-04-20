@@ -35,10 +35,10 @@ public class AdapterController {
 
 	@Autowired
 	private ApresentacaoAlunos apresentacaoalunos;
-	
+
 	@Autowired
 	private Avaliacaos avaliacaos;
-	
+
 	@Autowired
 	private Apresentacaos apresentacaos;
 
@@ -51,36 +51,37 @@ public class AdapterController {
 	@GetMapping("/apresentacao/{id}")
 	public ResponseApresentacao criteriosApresentacao(@PathVariable(value = "id") String id) {
 		List<ApresentacaoCriterio> apresentacaoCriterio = new ArrayList<ApresentacaoCriterio>();
-		
+
 		List<Apresentacao> ap = apresentacaos.findApresentacaoByCodigo(id);
-		
-		if (ap != null && !ap.isEmpty()){
+
+		if (ap != null && !ap.isEmpty()) {
 			Apresentacao apresentacao = ap.get(0);
-			apresentacaoCriterio = apresentacaocriterios.findAllCriteriosByApresentacao((int)apresentacao.getId());
+			apresentacaoCriterio = apresentacaocriterios.findAllCriteriosByApresentacao((int) apresentacao.getId());
 
 			List<ApresentacaoAluno> apresentacaoAluno = new ArrayList<ApresentacaoAluno>();
-			apresentacaoAluno = apresentacaoalunos.findAllAlunosByApresentacao((int)apresentacao.getId());
+			apresentacaoAluno = apresentacaoalunos.findAllAlunosByApresentacao((int) apresentacao.getId());
 			return new ResponseApresentacao(0, "", apresentacaoAluno, apresentacaoCriterio);
-			
-		}else {
+
+		} else {
 			return new ResponseApresentacao(1, "Apresentação não encontrada", null, null);
-			
+
 		}
-		
+
 	}
-	
+
 	@GetMapping("/aluno/{matricula}/{nome}")
-	public ResponseApresentacao cadastrarAluno(@PathVariable(value = "matricula") String matricula,@PathVariable(value = "nome") String nome) {
+	public ResponseApresentacao cadastrarAluno(@PathVariable(value = "matricula") String matricula,
+			@PathVariable(value = "nome") String nome) {
 		Aluno aluno = new Aluno();
 		aluno.setMatricula(matricula);
 		aluno.setNome(nome.replace("000", " "));
 		List<Aluno> a = alunos.findAlunosByMatricula(matricula);
-		if (a == null || a.isEmpty()){
+		if (a == null || a.isEmpty()) {
 			alunos.save(aluno);
 		}
 
 		return new ResponseApresentacao(0, "", null, null);
-			
+
 	}
 
 	@GetMapping("/avaliacao/{criterios}/{notas}/{aluno}/{avaliador}/{apresentacao}")
@@ -88,14 +89,20 @@ public class AdapterController {
 			@PathVariable(value = "notas") String notas, @PathVariable(value = "aluno") Integer aluno,
 			@PathVariable(value = "avaliador") String avaliador,
 			@PathVariable(value = "apresentacao") Integer apresentacao) {
-		
+
+		List<Avaliacao> listavaliacaos = avaliacaos.findDetalheAvaliacaoAluno(aluno, avaliador);
+
+		if (listavaliacaos != null && listavaliacaos.size() > 0) {
+			return new ResponseApresentacao(1, "Não foi possível avaliar pois você já avaliou este aluno!", "", "");
+		}
+
 		Avaliacao avaliacao = new Avaliacao();
 
 		String[] criterioArr = criterios.split(",");
 		String[] notasArr = notas.split(",");
-		for (int cont = 0; cont<criterioArr.length; cont++) {
-//			System.out.println(Double.valueOf(notasArr[cont]));
-//			System.out.println(Integer.valueOf(criterioArr[cont]));
+		for (int cont = 0; cont < criterioArr.length; cont++) {
+			// System.out.println(Double.valueOf(notasArr[cont]));
+			// System.out.println(Integer.valueOf(criterioArr[cont]));
 			avaliacao = new Avaliacao();
 			avaliacao.setId_apresentacao_criterio(Integer.valueOf(criterioArr[cont]));
 			avaliacao.setData(new Date());
@@ -105,7 +112,7 @@ public class AdapterController {
 			avaliacao.setId_apresentacao(apresentacao);
 			avaliacaos.save(avaliacao);
 		}
-		
+
 		return new ResponseApresentacao(0, "Avaliacao feita com sucesso!", "", "");
 	}
 

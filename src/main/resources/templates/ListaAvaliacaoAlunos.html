@@ -38,7 +38,7 @@
 							<th class="text-center" width="20%">Matrícula</th>
 							<th class="text-center" width="30%">Nome</th>
 							<th class="text-center" width="20%">Turma</th>
-							<th class="text-center" width="15%">Media</th>
+							<!-- <th class="text-center" width="15%">Media</th> -->
 							<th class="text-center" width="15%">Avaliações</th>
 						</tr>
 					</thead>
@@ -50,16 +50,14 @@
 								class="text-center"></td>
 							<td width="20%" th:text="${apresentacaoaluno.codigo_turma}"
 								class="text-center"></td>
-							<td><td class="text-center"><a class="glyphicon glyphicon-search"
+							<td class="text-center"><a
+								class="glyphicon glyphicon-search"
 								th:href="@{{id}(id=${apresentacaoaluno.id_apresentacao} + '/' + ${apresentacaoaluno.id})}">
-									
 							</a></td>
-					
-					</tr>
-				</tbody>
-			</table>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-	
 	</section>
 </body>
 
