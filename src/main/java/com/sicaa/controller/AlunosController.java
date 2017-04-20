@@ -48,7 +48,7 @@ public class AlunosController {
 				msg.add("*" + "A matrícula do aluno não pode ser vazia!");
 			}
 			
-			if (msg.size() == 0){
+			if (msg.size() == 0 && aluno.getId() == 0){
 				List<Aluno> a = alunos.findAlunosByMatricula(aluno.getMatricula());
 				if (a != null && !a.isEmpty()){
 					msg.add("*" + "Este aluno já existe!");

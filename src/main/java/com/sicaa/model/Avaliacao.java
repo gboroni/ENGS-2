@@ -38,11 +38,15 @@ public class Avaliacao implements Serializable {
 	
 	@Column
 	private String avaliador;
-	
+		
 	@Column
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date data;
+	
+	private String descricao_criterio;
+	
+	private Integer peso_criterio;
 
 	public long getId() {
 		return id;
@@ -98,6 +102,22 @@ public class Avaliacao implements Serializable {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public String getDescricao_criterio() {
+		return descricao_criterio;
+	}
+
+	public void setDescricao_criterio(String descricao_criterio) {
+		this.descricao_criterio = descricao_criterio;
+	}
+
+	public Integer getPeso_criterio() {
+		return peso_criterio;
+	}
+
+	public void setPeso_criterio(Integer peso_criterio) {
+		this.peso_criterio = peso_criterio;
 	} 
 
 }

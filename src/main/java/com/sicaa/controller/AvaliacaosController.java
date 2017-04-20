@@ -49,6 +49,12 @@ public class AvaliacaosController {
 		mv.addObject("avaliadores",avaliacaos.findAllAvaliadoresByApresentacao(id_apresentacao_aluno));
 		return mv;
 	}
-
+	
+	@RequestMapping("{id}/{id_apresentacao_aluno}/{avaliador}")
+	public ModelAndView detalhar(@PathVariable("id") Integer id, @PathVariable("id_apresentacao_aluno") Integer id_apresentacao_aluno,@PathVariable("avaliador") String avaliador) {
+		ModelAndView mv = new ModelAndView("ListaAvaliacaoAlunoDeltalhe");
+		mv.addObject("avaliacoes", avaliacaos.findDetalheAvaliacaoAluno(id_apresentacao_aluno, avaliador));
+		return mv;
+	}
 
 }

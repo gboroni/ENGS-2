@@ -17,7 +17,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="clearfix">
-					<h1 class="panel-title">Lista de Avaliadores</h1>
+					<h1 class="panel-title">Detalhes da Avaliação</h1>
 
 				</div>
 			</div>
@@ -35,24 +35,26 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th class="text-center" width="50%">Avaliador</th>
-							<th class="text-center" width="30%">Média</th>
-							<th class="text-center" width="20%">Detalhar</th>
+							<th class="text-center" width="50%">Critério</th>
+							<th class="text-center" width="30%">Peso</th>
+							<th class="text-center" width="20%">Nota</th>
+
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="avaliador : ${avaliadores}">
-							<td width="20%" th:text="${avaliador.avaliador}"
+						<tr th:each="avaliacao : ${avaliacoes}">
+							<td  th:text="${avaliacao.descricao_criterio}"
 								class="text-center"></td>
-							<td width="50%" th:text="${avaliador.nota}" class="text-center"></td>
-							<td class="text-center"><a
-								class="glyphicon glyphicon-search"
-								th:href="@{{id}(id=${avaliador.id_apresentacao_aluno} + '/' +${avaliador.avaliador})}">
-							</a></td>
-						</tr>
-					</tbody>
-				</table>
+							<td  th:text="${avaliacao.peso_criterio}"
+								class="text-center"></td>
+							<td  th:text="${avaliacao.nota}"
+								class="text-center"></td>
+							
+					</tr>
+				</tbody>
+			</table>
 			</div>
+	
 	</section>
 </body>
 
