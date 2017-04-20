@@ -17,9 +17,9 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="clearfix">
-					<h1 class="panel-title">Listar de Apresentacaos</h1>
+					<h1 class="panel-title">Lista de Apresentações</h1>
 					<a class="btn btn-link aw-link-panel" href="/apresentacaos/novo">Nova
-						Apresentacao</a>
+						Apresentação</a>
 				</div>
 			</div>
 			<div class="alert alert-success"
@@ -51,8 +51,8 @@
 						<tr th:each="apresentacao : ${apresentacaos}">
 							<td width="20%" th:text="${apresentacao.nome_tema}"></td>
 							<td width="10%" th:text="${apresentacao.codigo}"></td>
-							<td th:text="${apresentacao.inicio}"></td>
-							<td th:text="${apresentacao.fim}"></td>
+							<td th:text="${{apresentacao.inicio}}"></td>
+							<td th:text="${{apresentacao.fim}}"></td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
 								th:href="@{/apresentacaoalunos/(id=${apresentacao.id})}"> <span
 									class="glyphicon glyphicon-pencil"></span>
