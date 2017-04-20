@@ -32,6 +32,16 @@
 					</tbody>
 				</table>
 			</div>
+						<div class="alert alert-danger"
+				th:if="${!#strings.isEmpty(mensagem_erro)}">
+				<table>
+					<tbody>
+						<tr th:each="m : ${mensagem_erro}">
+							<td th:text="${m}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 			<div class="panel-body">
 				<table class="table table-bordered table-striped">
 					<thead>

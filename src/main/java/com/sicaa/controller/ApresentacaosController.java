@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sicaa.model.Apresentacao;
+import com.sicaa.model.Cont;
 import com.sicaa.model.ErrorCustom;
 import com.sicaa.repository.Apresentacaos;
+import com.sicaa.repository.Contador;
 import com.sicaa.repository.Temas;
 
 @Controller
@@ -27,6 +29,9 @@ public class ApresentacaosController {
 	
 	@Autowired
 	private Temas temas;
+	
+	@Autowired
+	private Contador contador;
 
 	@GetMapping("/novo")
 	public ModelAndView listar() {
@@ -104,6 +109,15 @@ public class ApresentacaosController {
 
 	@RequestMapping(params = { "id", "action" })
 	public ModelAndView excluir2(@RequestParam(value = "id") long id, @RequestParam(value = "action") String action) {
+	
+		Cont c = contador.findAvaliacaoByApresentacao((int)id);
+		if (c.getCont() > 0) {
+			List<String> msg = new ArrayList<String>();
+			msg.add("*" + "Não é possível remover esta apresentação pois ela já foi avaliada!");
+			ModelAndView mv = this.pesquisar();
+			mv.addObject("mensagem_erro", msg);
+			return mv;
+		}
 		if (action.equals("delete"))
 			apresentacaos.delete(id);
 		ModelAndView mv = new ModelAndView("ListaApresentacaos");
